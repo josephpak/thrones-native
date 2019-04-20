@@ -6,10 +6,10 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Platform, Text, View, FlatList, ScrollView} from 'react-native';
 import styled from 'styled-components/native'
-import csv from 'csvtojson'
+import {charactersData} from  "./data/thronesData"
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,30 +20,36 @@ const instructions = Platform.select({
 
 const AppContainer = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: #F5FCFF;
+  padding-top: 25;
+  padding-left: 25;
 `
 
 const Header = styled.Text`
   font-size: 20;
   text-align: center;
   margin-bottom: 10;
+  margin-top: 40;
 `
 
-const SubHeader = styled.Text`
-  text-align: center;
-  color: #333333;
-  margin-bottom: 5;
+const ListItem = styled.Text`
+  padding-top: 10;
+  padding-bottom: 10;
+  font-size: 18;
+  height: 44;
 `
 
 export default function App() {
+    const [characters, setCharacters] = useState(charactersData)
 
     return (
       <AppContainer>
+        <ScrollView>
         <Header>Thrones Watchlist</Header>
-        <SubHeader>To get started, edit App.js</SubHeader>
-        <SubHeader>{instructions}</SubHeader>
+        <FlatList
+          data={characters}
+          renderItem={({item}) => <ListItem>{item.name}</ListItem>}
+        />
+        </ScrollView>
       </AppContainer>
-    );
+    )
 }
