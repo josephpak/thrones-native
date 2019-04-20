@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import styled from 'styled-components/native'
+import csv from 'csvtojson'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -36,9 +37,8 @@ const SubHeader = styled.Text`
   margin-bottom: 5;
 `
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
+export default function App() {
+
     return (
       <AppContainer>
         <Header>Thrones Watchlist</Header>
@@ -46,5 +46,4 @@ export default class App extends Component<Props> {
         <SubHeader>{instructions}</SubHeader>
       </AppContainer>
     );
-  }
 }
